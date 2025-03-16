@@ -4,13 +4,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CustomerTest {
-
-    // Все тесты должны проходить, менять тесты не надо.
 
     @Test
     @DisplayName("Проверяем, что класс Customer не сломан")
@@ -28,7 +25,6 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled("надо удалить") // надо удалить
     @DisplayName("Объект Customer как ключ в карте")
     void customerAsKeyTest() {
         // given
@@ -42,7 +38,6 @@ class CustomerTest {
         // when
         long newScore = customer.getScores() + 10;
         String factData = map.get(new Customer(customerId, "IvanChangedName", newScore));
-
         // then
         assertThat(factData).isEqualTo(expectedData);
 
@@ -50,13 +45,11 @@ class CustomerTest {
         long newScoreSecond = customer.getScores() + 20;
         customer.setScores(newScoreSecond);
         String factDataSecond = map.get(customer);
-
         // then
         assertThat(factDataSecond).isEqualTo(expectedData);
     }
 
     @Test
-    @Disabled("надо удалить") // надо удалить
     @DisplayName("Сортировка по полю score, итерация по возрастанию")
     void scoreSortingTest() {
         // given
@@ -96,7 +89,6 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled("надо удалить") // надо удалить
     @DisplayName("Модификация коллекции")
     void mutationTest() {
         // given
@@ -118,7 +110,6 @@ class CustomerTest {
     }
 
     @Test
-    @Disabled("надо удалить") // надо удалить
     @DisplayName("Возвращание в обратном порядке")
     void reverseOrderTest() {
         // given
