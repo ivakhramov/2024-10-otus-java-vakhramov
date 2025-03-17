@@ -31,6 +31,10 @@ public class Customer {
         this.scores = scores;
     }
 
+    public Customer copy() {
+        return new Customer(this.id, this.name, this.scores);
+    }
+
     @Override
     public String toString() {
         return "Customer{" + "id=" + id + ", name='" + name + '\'' + ", scores=" + scores + '}';
