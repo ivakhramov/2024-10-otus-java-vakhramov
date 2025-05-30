@@ -1,0 +1,69 @@
+## Program execution time table
+<table>
+    <tr>
+        <th rowspan="2"></th>
+        <th colspan="18">Heap</th>
+    </tr>
+    <tr>
+        <td>4MB</td>
+        <td>8MB</td>
+        <td>16MB</td>
+        <td>32MB</td>
+        <td>64MB</td>
+        <td>128MB</td>
+        <th>256MB</th>
+        <td>512MB</td>
+        <td>1GB</td>
+        <th>2GB</th>
+        <td>3GB</td>
+        <td>4GB</td>
+        <td>5GB</td>
+        <td>6GB</td>
+        <td>7GB</td>
+        <td>8GB</td>
+        <th>9GB</th>
+        <td>10GB</td>
+    </tr>
+    <tr>
+        <th>Execution time before optimization, ms</th>
+        <td>error</td>
+        <td>270772</td>
+        <td>80443</td>
+        <td>54891</td>
+        <td>38892</td>
+        <td>32951</td>
+        <th>31356</th>
+        <td>30410</td>
+        <td>29557</td>
+        <th>28143</th>
+        <td>26616</td>
+        <td>25413</td>
+        <td>24189</td>
+        <td>22747</td>
+        <td>21570</td>
+        <td>19928</td>
+        <th>19048</th>
+        <td>same</td>
+    </tr>
+    <tr>
+        <th>Execution time after optimization, ms</th>
+        <td>5106</td>
+        <td>5075</td>
+        <td>5078</td>
+        <td>5075</td>
+        <td>5075</td>
+        <td>5081</td>
+        <td>5087</td>
+        <td>5081</td>
+        <td>5080</td>
+        <td>5081</td>
+        <td>5243</td>
+        <td>5244</td>
+        <td>5265</td>
+        <td>5231</td>
+        <td>5253</td>
+        <td>5240</td>
+        <td>5269</td>
+        <td>5264</td>
+    </tr>
+</table>
