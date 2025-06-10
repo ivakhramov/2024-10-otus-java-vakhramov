@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Управление клиентами</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        .container {
+            display: flex;
+            gap: 40px;
+        }
+        .form-section, .list-section {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            fetchClients();
+        };
+
+        function fetchClients() {
+            fetch('/api/clients')
+                .then(response => response.json())
+                .then(clients => {
+                    const tableBody = document.getElementById('clients-table-body');
+                    tableBody.innerHTML = ''; // Очищаем таблицу перед заполнением
+                    clients.forEach(client => {
+                        const row = `<tr>
+                            <td>${client.id}</td>
+                            <td>${client.name}</td>
+                            <td>${client.address}</td>
+                            <td>${client.phones.join(', ')}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Ошибка при загрузке клиентов:', error));
+        }
+
+        function createClient() {
+            const name = document.getElementById('clientName').value;
+            const address = document.getElementById('clientAddress').value;
+            const phones = document.getElementById('clientPhones').value.split(',').map(phone => phone.trim());
+
+            const clientData = {
+                name: name,
+                address: address,
+                phones: phones
+            };
+
+            fetch('/api/clients', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(clientData),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Очищаем форму
+                    document.getElementById('create-client-form').reset();
+                    // Обновляем список клиентов
+                    fetchClients();
+                } else {
+                    alert('Ошибка при создании клиента');
+                }
+            })
+            .catch(error => console.error('Ошибка при создании клиента:', error));
+        }
+    </script>
+</head>
+<body>
+<h1>Панель управления клиентами</h1>
+<div class="container">
+    <div class="form-section">
+        <h2>Создать нового клиента</h2>
+        <form id="create-client-form" onsubmit="event.preventDefault(); createClient();">
+            <p>
+                <label for="clientName">Имя:</label><br>
+                <input type="text" id="clientName" name="clientName" required>
+            </p>
+            <p>
+                <label for="clientAddress">Адрес:</label><br>
+                <input type="text" id="clientAddress" name="clientAddress" required>
+            </p>
+            <p>
+                <label for="clientPhones">Телефоны (через запятую):</label><br>
+                <input type="text" id="clientPhones" name="clientPhones" required>
+            </p>
+            <button type="submit">Создать</button>
+        </form>
+    </div>
+
+    <div class="list-section">
+        <h2>Список клиентов</h2>
+        <button onclick="fetchClients()">Обновить список</button>
+        <br>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Адрес</th>
+                <th>Телефоны</th>
+            </tr>
+            </thead>
+            <tbody id="clients-table-body">
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
